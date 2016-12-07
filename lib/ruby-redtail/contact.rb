@@ -2,7 +2,7 @@
 # require 'ruby-redtail/contact/notes'
 # require 'ruby-redtail/contact/accounts'
 # require 'ruby-redtail/contact/activities'
-# require 'ruby-redtail/contact/addresses'
+require 'ruby-redtail/contact/addresses'
 
 module RubyRedtail
   class Contact
@@ -11,10 +11,10 @@ module RubyRedtail
     # http://help.redtailtechnology.com/entries/21654562-authentication-methods
     def initialize(contact = {}, api_hash)
       @api_hash = api_hash
-      
+
       raise ArgumentError unless contact['ContactID']
       @id = contact['ContactID']
-      
+
       raise ArgumentError if contact.class != Hash
       contact.each do |key, value|
         key = key.underscore
@@ -22,28 +22,28 @@ module RubyRedtail
         instance_variable_set "@#{key}", value
       end
     end
-    
-    
-    # def addresses
-    #   RubyRedtail::Contact::Addresses.new @api_hash
-    # end
-    # 
+
+
+    def addresses
+      RubyRedtail::Contact::Addresses.new @api_hash
+    end
+    #
     # def notes
     #   RubyRedtail::Contact::Notes.new @api_hash
     # end
-    # 
+    #
     # def accounts
     #   RubyRedtail::Contact::Accounts.new @api_hash
     # end
-    # 
+    #
     # def activities
     #   RubyRedtail::Contact::Activities.new @api_hash
     # end
-    
+
     def tag_groups
       build_tag_groups_array RubyRedtail::Query.run("contacts/#{@contact_id}/taggroups", @api_hash, "GET")
     end
-    
+
     # Fetch Contact By Contact Id
     # Optional parameter: ?recent={recent}*
     # * {0} does nothing
@@ -51,7 +51,7 @@ module RubyRedtail
     def fetch (recent = false, basic = false)
       RubyRedtail::Query.run("contacts/#{@id}?recent=#{recent ? 1 : 0}", @api_hash, "GET")
     end
-    
+
     # Fetch Basic Contact By Contact Id
     # Optional parameter: ?recent={recent}*
     # * {0} does nothing
@@ -70,7 +70,7 @@ module RubyRedtail
     def update (params)
       RubyRedtail::Query.run("contacts/#{@id}", @api_hash, 'PUT', params)
     end
-  
+
     # Delete Contact
     def delete
       RubyRedtail::Query.run("contacts/#{@id}", @api_hash, 'DELETE')['Status'] == 0
@@ -136,9 +136,9 @@ module RubyRedtail
     def create_user_defined_field (params)
       update_user_defined_field(@id, 0, params)
     end
-    
+
     private
-      
+
     def build_tag_group tag_group_hash
       if tag_group_hash
         RubyRedtail::TagGroup.new(tag_group_hash,@api_hash)
@@ -154,6 +154,6 @@ module RubyRedtail
         raise RubyRedtail::AuthenticationError
       end
     end
-    
+
   end
 end

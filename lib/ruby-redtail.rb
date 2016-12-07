@@ -1,12 +1,12 @@
 require "base64"
 require 'httparty'
 
+require 'core_extensions/string'
+
 require 'ruby-redtail/user'
 require 'ruby-redtail/tag_group'
 require 'ruby-redtail/exceptions'
 require 'ruby-redtail/query'
-
-require 'core_extensions/string'
 
 module RubyRedtail
   class << self
