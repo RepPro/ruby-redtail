@@ -56,7 +56,7 @@ module RubyRedtail
       # Update Internet Address
       def update_internet_address (contact_id, internet_id, params)
         params = params.merge('ClientID' => contact_id)
-        RubyRedtail::Query.run("contacts/#{contact_id}/phones/#{internet_id}", @api_hash, 'PUT', params)
+        RubyRedtail::Query.run("contacts/#{contact_id}/internets/#{internet_id}", @api_hash, 'PUT', params)
       end
 
       # Create New Internet Address
@@ -66,7 +66,7 @@ module RubyRedtail
 
       # Delete Internet Address
       def delete_internet_address (contact_id, internet_id)
-        RubyRedtail::Query.run("contacts/#{contact_id}/phones/#{internet_id}", @api_hash, 'DELETE')
+        RubyRedtail::Query.run("contacts/#{contact_id}/internets/#{internet_id}", @api_hash, 'DELETE')
       end
 
       # Fetch Assets and Liabilities
