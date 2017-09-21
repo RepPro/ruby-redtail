@@ -1,8 +1,8 @@
 # require 'ruby-redtail/contact/tag_groups'
 # require 'ruby-redtail/contact/notes'
-# require 'ruby-redtail/contact/accounts'
-# require 'ruby-redtail/contact/activities'
-require 'ruby-redtail/contact/addresses'
+require_relative 'contact/accounts'
+# require 'contact/activities'
+require_relative 'contact/addresses'
 
 module RubyRedtail
   class Contact
@@ -25,17 +25,20 @@ module RubyRedtail
 
 
     def addresses
-      RubyRedtail::Contact::Addresses.new @api_hash
+      RubyRedtail::Contact::Addresses.new(api_hash)
     end
+
+    def accounts
+      RubyRedtail::Contact::Accounts.new(id, api_hash)
+    end
+    #
+
     #
     # def notes
     #   RubyRedtail::Contact::Notes.new @api_hash
     # end
     #
-    # def accounts
-    #   RubyRedtail::Contact::Accounts.new @api_hash
-    # end
-    #
+
     # def activities
     #   RubyRedtail::Contact::Activities.new @api_hash
     # end
@@ -48,7 +51,7 @@ module RubyRedtail
     # Optional parameter: ?recent={recent}*
     # * {0} does nothing
     # * {1} updates recently viewed
-    def fetch (recent = false, basic = false)
+    def fetch(recent = false, basic = false)
       RubyRedtail::Query.run("contacts/#{@id}?recent=#{recent ? 1 : 0}", @api_hash, "GET")
     end
 
@@ -56,7 +59,7 @@ module RubyRedtail
     # Optional parameter: ?recent={recent}*
     # * {0} does nothing
     # * {1} updates recently viewed
-    def fetch_basic (recent = false, basic = false)
+    def fetch_basic(recent = false, basic = false)
       RubyRedtail::Query.run("contacts/#{@id}/basic?recent=#{recent ? 1 : 0}", @api_hash, "GET")
     end
 
@@ -67,7 +70,7 @@ module RubyRedtail
     end
 
     # Update Contact
-    def update (params)
+    def update(params)
       RubyRedtail::Query.run("contacts/#{@id}", @api_hash, 'PUT', params)
     end
 
@@ -83,7 +86,7 @@ module RubyRedtail
 
     # Update Contact Details
     # Is this required? (Deprecated on API website). Ask Client?
-    def update_details (params)
+    def update_details(params)
       RubyRedtail::Query.run("contacts/#{@id}/details", @api_hash, 'PUT', params)
     end
 
@@ -103,7 +106,7 @@ module RubyRedtail
     end
 
     # Update Contact Personal Profile
-    def update_personal_profile (personal_profile_id, params)
+    def update_personal_profile(personal_profile_id, params)
       RubyRedtail::Query.run("contacts/#{@id}/personalprofile/#{personal_profile_id}", @api_hash, 'PUT', params)
     end
 
@@ -113,7 +116,7 @@ module RubyRedtail
     end
 
     # Update Contact Important Information
-    def update_important_information (params)
+    def update_important_information(params)
       RubyRedtail::Query.run("contacts/#{@id}/importantinfo", @api_hash, 'PUT', params)
     end
 
@@ -128,18 +131,18 @@ module RubyRedtail
     end
 
     # Update User Defined Field for Contact
-    def update_user_defined_field (udf_id, params)
+    def update_user_defined_field(udf_id, params)
       RubyRedtail::Query.run("contacts/#{@id}/udf/#{udf_id}", @api_hash, 'PUT', params)
     end
 
     # Create User Defined Field for Contact
-    def create_user_defined_field (params)
+    def create_user_defined_field(params)
       update_user_defined_field(@id, 0, params)
     end
 
     private
 
-    def build_tag_group tag_group_hash
+    def build_tag_group(tag_group_hash)
       if tag_group_hash
         RubyRedtail::TagGroup.new(tag_group_hash,@api_hash)
       else
@@ -147,7 +150,7 @@ module RubyRedtail
       end
     end
 
-    def build_tag_groups_array tag_group_hashes
+    def build_tag_groups_array(tag_group_hashes)
       if tag_group_hashes
         tag_group_hashes.collect { |tag_group_hash| build_tag_group tag_group_hash }
       else
