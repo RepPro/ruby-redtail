@@ -21,7 +21,7 @@ module RubyRedtail
       end
 
       def assets(account_id)
-        RubyRedtail::Query.run("contacts/#{contact_id}/#{account_id}/assets", @api_hash, "GET")
+        RubyRedtail::Query.run("contacts/#{contact_id}/accounts/#{account_id}/assets", @api_hash, "GET")
       end
 
       # Fetch Assets and Liabilities
