@@ -13,7 +13,7 @@ module RubyRedtail
       end
 
       def create(params)
-        update(@contact_id, 0, params)
+        update(0, params)
       end
 
       def update(account_id, params)

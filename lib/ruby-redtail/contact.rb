@@ -31,6 +31,10 @@ module RubyRedtail
     def accounts
       RubyRedtail::Contact::Accounts.new(id, api_hash)
     end
+
+    def family
+      RubyRedtail::Contact::Family.new(id, api_hash)
+    end
     #
 
     #
@@ -88,11 +92,6 @@ module RubyRedtail
     # Is this required? (Deprecated on API website). Ask Client?
     def update_details(params)
       RubyRedtail::Query.run("contacts/#{@id}/details", @api_hash, 'PUT', params)
-    end
-
-    # Fetch Contact Family
-    def family
-      RubyRedtail::Query.run("contacts/#{@id}/family", @api_hash, "GET")
     end
 
     # Fetch Contact Memberships
