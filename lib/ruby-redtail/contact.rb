@@ -1,5 +1,6 @@
 # require 'ruby-redtail/contact/tag_groups'
 # require 'ruby-redtail/contact/notes'
+require_relative 'contact/family'
 require_relative 'contact/accounts'
 # require 'contact/activities'
 require_relative 'contact/addresses'
