@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
     "lib/ruby-redtail/authentication.rb",
     "lib/ruby-redtail/client.rb",
     "lib/ruby-redtail/contact.rb",
-    "lib/ruby-redtail/contact/family.rb"
+    "lib/ruby-redtail/contact/family.rb",
     "lib/ruby-redtail/contact/accounts.rb",
     "lib/ruby-redtail/contact/activities.rb",
     "lib/ruby-redtail/contact/addresses.rb",
