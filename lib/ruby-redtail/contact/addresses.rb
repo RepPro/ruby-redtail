@@ -20,7 +20,7 @@ module RubyRedtail
 
       # Create New Address
       def create(params)
-        update(contact_id, 0, params)
+        update(0, params)
       end
 
       # Delete Address
@@ -41,7 +41,7 @@ module RubyRedtail
 
       # Create New Phone
       def create_phone(params)
-        update_phone(contact_id, 0, params)
+        update_phone(0, params)
       end
 
       # Delete Phone
@@ -62,7 +62,7 @@ module RubyRedtail
 
       # Create New Internet Address
       def create_internet_address(params)
-        update_internet_address(contact_id, 0, params)
+        update_internet_address(0, params)
       end
 
       # Delete Internet Address
