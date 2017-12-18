@@ -26,7 +26,7 @@ module RubyRedtail
 
 
     def addresses
-      RubyRedtail::Contact::Addresses.new(api_hash)
+      RubyRedtail::Contact::Addresses.new(id, api_hash)
     end
 
     def accounts
