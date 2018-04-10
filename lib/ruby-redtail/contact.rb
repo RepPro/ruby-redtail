@@ -125,6 +125,11 @@ module RubyRedtail
       RubyRedtail::Query.run("contacts/#{@id}/importantinfo", @api_hash, "GET")
     end
 
+    # Fetch Tax Information
+    def taxes
+      RubyRedtail::Query.run("contacts/#{@id}/tax", @api_hash, "GET")
+    end
+
     # Fetch User Defined Fields for Contact
     def user_defined_fields
       RubyRedtail::Query.run("contacts/#{@id}/udf", @api_hash, "GET")
